@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import "./ExpenseForm.css";
 
 function ExpenseForm(props) {
@@ -8,44 +8,47 @@ function ExpenseForm(props) {
   //     enteredAmount: ''
   // })
 
-  const [title, setTitle] = useState("");
-  const [amount, setAmount] = useState("");
-  const [date, setDate] = useState("");
+  // const [title, setTitle] = useState("");
+  // const [amount, setAmount] = useState("");
+  // const [date, setDate] = useState("");
 
-  const handleTitleInput = (e) => {
-    setTitle(e.target.value);
-    // setUsetInput((prev) => {
-    //     return { ...prev, enteredTitle: e.target.value }
-    // })
-  };
+  const title = useRef();
+  const amount = useRef();
+  const date = useRef();
 
-  const handleAmountInput = (e) => {
-    setAmount(e.target.value);
-    // setUsetInput((prev) => {
-    //     return { ...prev, enteredAmount: e.target.value }
-    // })
-  };
-  const handleDateInput = (e) => {
-    setDate(e.target.value);
-    // setUsetInput((prev) => {
-    //     return { ...prev, enteredAmount: e.target.value }
-    // })
-  };
+  // const handleTitleInput = (e) => {
+  //   setTitle(e.target.value);
+  //   // setUsetInput((prev) => {
+  //   //     return { ...prev, enteredTitle: e.target.value }
+  //   // })
+  // };
+
+  // const handleAmountInput = (e) => {
+  //   setAmount(e.target.value);
+  //   // setUsetInput((prev) => {
+  //   //     return { ...prev, enteredAmount: e.target.value }
+  //   // })
+  // };
+  // const handleDateInput = (e) => {
+  //   setDate(e.target.value);
+  //   // setUsetInput((prev) => {
+  //   //     return { ...prev, enteredAmount: e.target.value }
+  //   // })
+  // };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("submitted");
 
     const expenseData = {
-      title: title,
-      amount: +amount,
-      date: new Date(date),
+      title: title.current.value,
+      amount: +amount.current.value,
+      date: new Date(date.current.value),
     };
 
     props.onSaveExpenseData(expenseData);
-    setTitle("");
-    setAmount("");
-    setDate("");
+    // setTitle("");
+    // setAmount("");
+    // setDate("");
     props.onCancel();
   };
 
@@ -63,8 +66,9 @@ function ExpenseForm(props) {
             type="text"
             name=""
             id=""
-            onChange={handleTitleInput}
-            value={title}
+            // onChange={handleTitleInput}
+            // value={title}
+            ref={title}
             required
           />
         </div>
@@ -76,21 +80,23 @@ function ExpenseForm(props) {
             step="0.01"
             name=""
             id=""
-            onChange={handleAmountInput}
-            value={amount}
+            ref={amount}
+            // onChange={handleAmountInput}
+            // value={amount}
             required
           />
         </div>
         <div className="new-expense__control">
-          <label htmlFor="">Amount</label>
+          <label htmlFor="">Date</label>
           <input
             type="date"
             min="2019-01-01"
             max="2022-12-31"
             name=""
             id=""
-            onChange={handleDateInput}
-            value={date}
+            ref={date}
+            // onChange={handleDateInput}
+            // value={date}
             required
           />
         </div>

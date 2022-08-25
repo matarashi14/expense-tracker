@@ -1,15 +1,6 @@
 import React from "react";
 import './Bar.css'
 
-{
-  /* <Bar
-  key={dataPoint.label}
-  value={dataPoint.value}
-  maxValue={null}
-  label={dataPoint.label}
-/>; */
-}
-
 function Bar(props) {
   let barFillHeight = "0%";
 
